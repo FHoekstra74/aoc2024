@@ -1,8 +1,8 @@
 locals {
   input      = file("../input/day1.txt")
   inputlist  = compact(split("\n", local.input))
-  inputleft  = [for v in local.inputlist : regex("[0-9]+", v)]
-  inputright = [for v in local.inputlist : regexall("[0-9]+", v)[1]]
+  inputleft  = [for v in local.inputlist : regex("\\d+", v)]
+  inputright = [for v in local.inputlist : regex("\\d+$", v)]
   leftsort   = sort(local.inputleft)
   rightsort  = sort(local.inputright)
   diff       = [for i, v in local.rightsort : (tonumber(v) - tonumber(local.leftsort[i]))]
